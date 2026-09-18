@@ -22,9 +22,11 @@ class Trainer:
         if uref is None: 
             uref = torch.zeros(self.controller.m)
             uref = uref.repeat(self.controller.n_batch, self.controller.N)
+            uref = uref.to(self.controller.device)
         if yref is None: 
             yref = torch.zeros(self.controller.p)
             yref = yref.repeat(self.controller.n_batch, self.controller.N)
+            yref = yref.to(self.controller.device)
 
         for _ in pbar:
             

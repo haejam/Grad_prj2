@@ -12,7 +12,9 @@ def episode_loss(Y : torch.Tensor, U : torch.Tensor, controller) -> torch.Tensor
     Y should be shape(batch, T, p) - T is length of trajectory
     If doing reference tracking, Y and U are expected to be in delta formulation
     """
-    
+    Y = Y.float()
+    U = U.float()
+
     n_batch = Y.shape[0]
     T = Y.shape[1]
     phi = torch.Tensor().to(controller.device)

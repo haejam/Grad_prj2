@@ -244,13 +244,13 @@ class DeePC(nn.Module):
 
     def initialise(self, lam_y=None, lam_u=None, lam_g1=None, lam_g2=None):
         if self.lam_g1 is not None:
-            self.lam_g1.data = torch.Tensor([lam_g1]) + torch.randn((1,))*0.01
+            self.lam_g1.data = (torch.Tensor([lam_g1]) + torch.randn((1,))*0.01).to(self.device)
         if self.lam_g2 is not None:
-            self.lam_g2.data = torch.Tensor([lam_g2]) + torch.randn((1,))*0.01
+            self.lam_g2.data = (torch.Tensor([lam_g2]) + torch.randn((1,))*0.01).to(self.device)
         if self.lam_y is not None:
-            self.lam_y.data = torch.Tensor([lam_y]) + torch.randn((1,))*0.01
+            self.lam_y.data = (torch.Tensor([lam_y]) + torch.randn((1,))*0.01).to(self.device)
         if self.lam_u is not None:
-            self.lam_u.data = torch.Tensor([lam_u]) + torch.randn((1,))*0.01
+            self.lam_u.data = (torch.Tensor([lam_u]) + torch.randn((1,))*0.01).to(self.device)
 
 
 class npDeePC:
@@ -285,7 +285,7 @@ class npDeePC:
         self.y_upper = y_constraints[1]
         self.u_lower= u_constraints[0]
         self.u_upper = u_constraints[1]
-        self._solver_swtich = False
+        self._solver_switch = False
         # Check for full row rank
         H = block_hankel(w=ud.reshape((m*self.T,)), L=Tini+N+n, d=m)
         rank = np.linalg.matrix_rank(H)
